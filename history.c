@@ -72,31 +72,37 @@ int read_history(info_t *info)
 		return (0);
 	fd = open(filename, O_RDONLY);
 
-	free(filename);
-
 	if (fd == -1)
-		return (-1);
+		free(filename);
+	return (-1);
 
 	if (stat(filename, &st) == -1)
 		close(fd);
+	free(filename);
 	return (-1);
+
+	free(filename);
 
 	fsize = st.st_size;
 
 	if (fsize < 2)
-		return (0);
+		close(fd);
+	return (0);
+
 	buf = malloc(fsize + 1);
 
 	if (!buf)
-		return (0);
+		close(fd);
+	return (0);
+
 	rdlen = read(fd, buf, fsize);
 	buf[fsize] = 0;
 
 	if (rdlen <= 0)
-	{
 		free(buf);
-		return (0);
-	}
+	close(fd);
+	return (0);
+
 	close(fd);
 
 	for (i = 0; i < fsize; i++)
