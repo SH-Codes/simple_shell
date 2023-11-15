@@ -61,6 +61,7 @@ char **strtow(char *str, char *d)
 char **strtow2(char *str, char d)
 {
 	char delim[2];
+
 	delim[0] = d;
 	delim[1] = '\0';
 	return (strtow(str, delim));

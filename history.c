@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * get_history_file - constructs and returns the history file path
  * @info: parameter struct
@@ -80,7 +79,7 @@ int read_history(info_t *info)
 
 	if (stat(filename, &st) == -1)
 		close(fd);
-	return(-1);
+	return (-1);
 
 	fsize = st.st_size;
 
